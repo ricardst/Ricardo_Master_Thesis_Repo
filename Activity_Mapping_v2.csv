@@ -1,0 +1,144 @@
+Former_Label,New_Label
+wheelchair_to_sitting_bed,Transfer
+wheelchair_to_sit,Transfer
+handling_oven,handling_oven
+conversation,Conversation
+exercising,Exercising
+petting_dog,petting_dog
+not recognized,Unknown
+using_laptop,Using Computer
+wheelchair_to_sit_bed,Transfer
+using_pc,Using Computer
+wheelchair_to_bed,Transfer
+sit_to_wheelchair,Transfer
+using_phone,Using Phone
+reading_and_writing,reading_and_writing
+watching_tv_smoking,watching_tv_smoking
+doing_dishes,doing_dishes
+watching_tv,watching_tv
+dressing,Changing Clothes
+handling,handling
+washing_body,washing_body
+pushing_up,Exercising
+assisted_propulsion_and_conversation,Assisted Propulsion
+handelng_phone,Using Phone
+wheelchair_to_car,Transfer
+using_computer,Using Computer
+sitting_car,In Vehicle
+sit_to_lying,sit_to_lying
+self_propulsion,Self Propulsion
+workout_prep,workout_prep
+handling_shelf,handling_shelf
+opening_door,opening_door
+washing_face,washing_face
+take_off_clothes,Changing Clothes
+handling_door,handling_door
+blowing_nose,blowing_nose
+handling_and_conversation,Conversation
+washing_hands,Washing Hands
+using_pc_and_eating,using_pc_and_eating
+using_phone_and_eatting,using_phone_and_eatting
+manipulating,manipulating
+wheelchair_left_alone,wheelchair_left_alone
+opening_shelf,opening_shelf
+handling_wheelchair,handling_wheelchair
+lying,lying
+beard_hair_styling,beard_hair_styling
+skin_care,skin_care
+assisted_propulsion,Assisted Propulsion
+brushing_teeth,brushing_teeth
+using_phone_table,Using Phone
+lying_to_sit,lying_to_sit
+opening_window,opening_window
+conversation_and_eating,conversation_and_eating
+put_on_clothes,Changing Clothes
+eating_and_conversation,eating_and_conversation
+reading,reading
+putting_toothpaste,putting_toothpast
+office_work,office_work
+manipulating_oven,manipulating_oven
+watching_tv_eating,Eating
+wearing_glasses,wearing_glasses
+assisted_care,Receiving Care
+car_to_wheelchair,Transfer
+preparing_meal,preparing_meal
+toilet_rountine,Toileting
+bending,bending
+watching_tv_sitting_table,watching_tv_sitting_table
+pressure_relief,Pressure Relief
+pressure_release,Pressure Relief
+gardening,gardening
+smoking,smoking
+sitting_table_reading,sitting_table_reading
+sit_bed_to_wheelchair,Transfer
+rinsing_mouth,rinsing_mouth
+wheelchair_in_trunk,wheelchair_in_trunk
+dark,dark
+toilet_routine,Toileting
+clearning_teeth,clearning_teeth
+car,In Vehicle
+shampoo,shampoo
+sitting_table_eating,Eating
+sit_bed,sit_bed
+sitting_bed_to_wheelchair,Transfer
+excercising,Exercising
+scratching_back,scratching_back
+arm_raises,Arm Raises
+turning_bed_counter_clockwise,turning_bed_counter_clockwise
+writing,writing
+conversation_and_eatting,conversation_and_eatting
+talking_phone,talking_phone
+working,working
+sitting_wheelchair,Resting
+cooking,cooking
+driving_car,In Vehicle
+drying_hair,drying_hair
+handling_object,handling_object
+closing_door,closing_door
+sync_event,sync_event
+driving_train,In Vehicle
+sitting_table,Resting
+drinking,Eating
+black_video,black_video
+workout,Exercising
+waiting,Resting
+lying_for_medical_procedure,lying_for_medical_procedure
+eating,Eating
+folding_clothes,folding_clothes
+conversation_smoking,conversation_smoking
+working_table,working_table
+conversation_and_drinking,conversation_and_drinking
+puttting_on_jacket,Changing Clothes
+getting_coffee,getting_coffee
+brushing_hair,brushing_hair
+conversation_and_phones,conversation_and_phones
+undressing,Changing Clothes
+self_propulsion_and_conversation,Self Propulsion
+housework,housework
+assisted_propulsion_and_using_phone,Assisted Propulsion
+wheelchair _in_storage,wheelchair _in_storage
+bed_to_wheelchair,Transfer
+shaking_hand,shaking_hand
+sitting_table_using_phone,sitting_table_using_phone
+driving,In Vehicle
+using_phones,Using Phone
+camera_setup,camera_setup
+conversation_and_reading,conversation_and_reading
+conversation_and_eating,conversation_and_eating
+conversation_and_smoking,conversation_and_smoking
+crafting,crafting
+handling_fridge,handling_fridge
+medical_procedure,medical_procedure
+nurse_treatment,nurse_treatment
+sitting_couch,Resting
+sitting_table_smoking,Resting
+smoking_and_conversation,smoking_and_conversation
+time_sync,time_sync
+using_phone_and_eating,using_phone_and_eating
+converastion_and_eating,converastion_and_eating
+arm_sleeve,Changing Clothes
+chair_to_wheelchair,Transfer
+cycling,Exercising
+reading_newspaper,reading_newspaper
+wheelchair_to_chair,Transfer
+assisted_propulsion_and_phone,Assisted Propulsion

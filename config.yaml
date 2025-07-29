@@ -1,0 +1,293 @@
+# --- config.yaml ---
+
+# General Settings
+seed_number: 42
+base_log_filename: 'pipeline.log'
+results_dir: 'results'                   # Dir to save models, plots, metrics, etc.
+
+# --- Stage 0: Raw Data Processing (raw_data_processor.py) ---
+raw_data_input_dir: "/scai_data2/scai_datasets/interim/scai-outsense/" # Base dir containing subject folders with raw CSVs
+processed_data_output_dir: 'processed_subjects' # Output dir for *_filtered_corrected.pkl files
+sync_parameters_file: 'Sync_Parameters_andre.yaml' # Path to sync parameters
+global_labels_file: 'Final_Labels_corrected.csv' # Path to global labels
+subjects_to_process: # List of subjects to process in this stage
+  - 'OutSense-036'
+  - 'OutSense-115'
+  - 'OutSense-284'
+  - 'OutSense-293'
+  - 'OutSense-425_48h'
+  - 'OutSense-498' 
+  - 'OutSense-515'
+  - 'OutSense-532'
+  - 'OutSense-608'
+  - 'OutSense-619'
+  - 'OutSense-652'
+  - 'OutSense-694'
+  - 'OutSense-713'
+  - 'OutSense-785'
+  - 'OutSense-795'
+  - 'OutSense-991' 
+# Raw data parsing details (structure might need adjustment based on actual YAML)
+raw_data_parsing_config: # Corresponds to 'raw_data_pars' in the original script
+  corsano_wrist_acc:
+    sample_rate: 100 
+    data_columns: ['accX', 'accY', 'accZ']
+    file_format: ['.csv.gz']
+    timestamp_column: 'time'
+    unit: 's'
+    header_row: 0
+  cosinuss_ear_acc_x_acc_y_acc_z:
+    sample_rate: 100 
+    data_columns: ['acc_x', 'acc_y', 'acc_z']
+    file_format: ['.csv.gz']
+    timestamp_column: 'time'
+    unit: 's'
+    header_row: 0
+  mbient_imu_wc_accelerometer:
+    sample_rate: 50 
+    data_columns: ['x_axis_g', 'y_axis_g', 'z_axis_g']
+    file_format: ['.csv.gz']
+    timestamp_column: 'time'
+    unit: 'ms' 
+    header_row: 0
+  mbient_imu_wc_gyroscope:
+    sample_rate: 50 
+    data_columns: ['x_axis_dps', 'y_axis_dps', 'z_axis_dps']
+    file_format: ['.csv.gz']
+    timestamp_column: 'time'
+    unit: 'ms'
+    header_row: 0
+  vivalnk_vv330_acceleration:
+    sample_rate: 100 
+    data_columns: ['x', 'y', 'z']
+    file_format: ['.csv.gz']
+    timestamp_column: 'time'
+    unit: 's'
+    header_row: 0
+  sensomative_bottom_logger:
+    sample_rate: 25 
+    data_columns: [ 'value_1', 'value_2', 'value_3', 'value_4', 'value_5', 'value_6', 'value_7', 'value_8', 'value_9', 'value_10', 'value_11' ]
+    file_format: ['.csv.gz']
+    timestamp_column: 'time'
+    unit: 's'
+    header_row: 0
+  sensomative_back_logger:
+    sample_rate: 25 
+    data_columns: [ 'value_1', 'value_2', 'value_3', 'value_4', 'value_5', 'value_6', 'value_7', 'value_8', 'value_9', 'value_10', 'value_11' ]
+    file_format: ['.csv.gz']
+    timestamp_column: 'time'
+    unit: 's'
+    header_row: 0
+  corsano_bioz_acc:
+    sample_rate: 100 
+    data_columns: ['accX', 'accY', 'accZ']
+    file_format: ['.csv.gz']
+    timestamp_column: 'time'
+    unit: 's'
+    header_row: 0
+# Resampling and Filtering Parameters (used in raw_data_processor)
+upsample_freq: 100
+downsample_freq: 25 # Final target frequency AFTER this stage
+filter_parameters:
+  lowcut_kinematic: 0.5 # For potential bandpass (currently only lowpass used)
+  highcut_kinematic: 9.9 # Lowpass cutoff (ensure < Nyquist of downsample_freq)
+  filter_order: 4
+# Plotting Parameters
+enable_preprocessing_plots: False  # or false
+preprocessing_plots_output_dir: 'results/preprocessing_visualizations_test' # Choose your output directory
+plot_time_chunk_minutes: 5      # Integer, e.g., 5 for 5-minute chunks per page
+
+
+
+# --- Stage 1: Data Loading & Cleaning (data_loader.py) ---
+# Reads output from Stage 0
+cleaned_data_input_dir: 'processed_subjects' # Reads from output dir of previous stage
+activity_mapping_file: 'Activity_Mapping_v2.csv'
+# If empty or omitted, all subjects found in cleaned_data_input_dir will be loaded.
+subjects_to_load:
+  - 'OutSense-036'
+  #- 'OutSense-115'
+  #- 'OutSense-284'
+  - 'OutSense-293'
+  #- 'OutSense-425'
+  - 'OutSense-498' 
+  - 'OutSense-515'
+  #- 'OutSense-532'
+  #- 'OutSense-608'
+  #- 'OutSense-619'
+  #- 'OutSense-652'
+  #- 'OutSense-694'
+  - 'OutSense-713'
+  #- 'OutSense-785'
+  #- 'OutSense-795'
+  - 'OutSense-991' 
+  # Add other subjects as needed for the combined dataset
+  # If you want ALL subjects processed by stage 0, leave this list empty or comment it out.
+sensor_columns_original: # List the columns *after* renaming by raw_data_processor
+  - 'wrist_acc_x'
+  - 'wrist_acc_y'
+  - 'wrist_acc_z'
+  - 'ear_acc_x'
+  - 'ear_acc_y'
+  - 'ear_acc_z'
+  - 'x_axis_g' #'imu_acc_x'
+  - 'y_axis_g' #'imu_acc_y'
+  - 'z_axis_g' #'imu_acc_z'
+  - 'bioz_acc_x'
+  - 'bioz_acc_y'
+  - 'bioz_acc_z'
+  - 'x_axis_dps' #'gyro_x'
+  - 'y_axis_dps' #'gyro_y'
+  - 'z_axis_dps' #'gyro_z'
+  - 'vivalnk_acc_x'
+  - 'vivalnk_acc_y'
+  - 'vivalnk_acc_z'
+  - 'bottom_value_1'
+  - 'bottom_value_2'
+  - 'bottom_value_3'
+  - 'bottom_value_4'
+  - 'bottom_value_5'
+  - 'bottom_value_6'
+  - 'bottom_value_7'
+  - 'bottom_value_8'
+  - 'bottom_value_9'
+  - 'bottom_value_10'
+  - 'bottom_value_11'
+  - 'back_value_1'
+  - 'back_value_2'
+  - 'back_value_3'
+  - 'back_value_4'
+  - 'back_value_5'
+  - 'back_value_6'
+  - 'back_value_7'
+  - 'back_value_8'
+  - 'back_value_9'
+  - 'back_value_10'
+  - 'back_value_11'
+# Manually excluded subjects (these subjects' data will be completely removed)
+excluded_subjects_manual: 
+
+# Excluded sensors (these sensor features will be removed from the feature matrix)
+# Use the exact sensor names as listed in 'sensor_columns_original' above
+#excluded_sensors: []
+# Example of how to exclude specific sensors:
+excluded_sensors:
+  - 'back_value_1'
+  - 'back_value_2'
+  - 'back_value_3'
+  - 'back_value_4'
+  - 'back_value_5'
+  - 'back_value_6'
+  - 'back_value_7'
+  - 'back_value_8'
+  - 'back_value_9'
+  - 'back_value_10'
+  - 'back_value_11'
+  - 'ear_acc_x'
+  - 'ear_acc_y'
+  - 'ear_acc_z'
+
+ACTIVITIES_OF_INTEREST:
+  #- 'Exercising'
+  - 'Arm Raises'
+  - 'Self Propulsion' 
+  - 'Eating'
+  - 'Resting'
+  - 'Assisted Propulsion'
+  - 'Transfer'
+  - 'Conversation'
+  #- 'Washing Hands'
+  #- 'Using Computer'
+  #- 'Pressure Relief'
+  #- 'Using Phone'
+  - 'Changing Clothes'
+
+# Output directory for combined cleaned data (input for feature_engineering)
+intermediate_feature_dir: 'features'
+
+# --- Stage 2: Feature Engineering (feature_engineering.py) ---
+# Reads output from Stage 1 (combined_cleaned_data.pkl)
+use_tabpfn_feature_engineering: False # Set to true to use TabPFN-specific feature engineering
+calculate_engineered_features: False # Set to true to calculate features
+window_size: 250 #10s
+window_step: 225 #9s
+target_column: 'Label' # Column name for activity labels in input DataFrame
+subject_id_column: 'SubjectID' # Column name for subject ID in input DataFrame
+feat_eng_batch_size: 10000 # Batch size for feature calculation
+save_intermediate_arrays: False # Set to true when using TabPFN version for compatibility
+plotting_config: # New section for window plotting
+  enable_window_plotting: False
+  window_plots_output_dir: 'window_plots' # Relative to results_dir
+
+# --- Stage 3: Feature Selection (feature_selector.py & data_preparation.py) ---
+# Reads outputs from Stage 2
+run_feature_selection: False
+feature_selection_output_file: 'selected_features_pyimpetus.pkl' # Relative to results_dir
+use_selected_features: False
+feature_selection_input_file: 'selected_features_pyimpetus.pkl' # Relative to results_dir
+# PyImpetus Parameters
+pyimpetus_model_type: 'RandomForestClassifier'
+pyimpetus_model_params:
+  n_estimators: 50
+  class_weight: 'balanced'
+pyimpetus_num_simul: 10
+pyimpetus_simul_size: 0.2
+pyimpetus_p_val_thresh: 0.05
+pyimpetus_cv: 0
+
+# --- Stage 4: Data Preparation (data_preparation.py) ---
+# Reads outputs from Stage 2 (and optionally Stage 3)
+use_engineered_features: False
+test_subjects:
+  - 'OutSense-991'
+train_subjects:
+  - 'OutSense-036'
+  - 'OutSense-293'
+  - 'OutSense-498'
+  - 'OutSense-515'
+  - 'OutSense-713'
+batch_size: 32
+num_workers: 0
+
+# --- Stage 5: Model Training (training.py) ---
+# Reads outputs from Stage 4
+#model_name: 'Simple1DCNN'
+model_name: 'GeARFEN' # <<< CHANGED: Set to the new model name
+model_params:
+  # FEN Params (Note: FEN in_channels will be 1 due to sequential processing)
+  fen_out_channels1: 128 # Values from colleague's filename example
+  fen_out_channels2: 256
+  fen_out_channels3: 256
+  fen_out_channels4: 128 # This becomes PART of input_size for FLN
+  # FLN Params
+  fln_hidden_size: 256   # Hidden size for LSTM layers (from colleague's example)
+  fln_num_lstm_layers: 2 # Number of stacked LSTM layers (from model code)
+
+n_epochs: 50
+fen_lr: 0.001 # Separate LR for FEN
+fln_lr: 0.001 # Separate LR for FLN
+use_early_stopping: True # ADDED: Toggle for early stopping
+early_stopping_patience: 5
+early_stopping_metric: 'val_acc' # Monitor validation accuracy ('val_loss' also possible)
+
+lr: 0.0005
+use_cross_validation: False
+tune_hyperparameters: False
+n_splits_cv: 5
+lr_candidates: [0.001, 0.0005, 0.0001]
+optimizer_params: { weight_decay: 0.0001 }
+scheduler_params: { mode: 'min', factor: 0.5, patience: 5, threshold: 0.001 }
+
+# --- Stage 6: Evaluation (evaluation.py) ---
+# Reads outputs from Stage 4 and Stage 5
+evaluation_metrics:
+  - 'accuracy'
+  - 'weighted_f1'
+  - 'macro_f1'
+  - 'confusion_matrix'
+  - 'roc_auc'
+  - 'pr_auc'
+
+
+# Misc
+visualize_model_onnx: False
