@@ -52,6 +52,3 @@ The pipeline should be executed by running the `raw_data_processor.py` script lo
 
 Then either the XGBoost model or the MCA-TCN models can be trained by executing the training files.
 
-```bash
-python src/raw_data_processor.py
-```
