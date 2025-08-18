@@ -48,7 +48,9 @@ Ensure that the parent directory of the project has write permissions for these 
 
 ## Running the Pipeline
 
-The main pipeline can be executed by running the `main_pipeline.py` script located in the `src` directory.
+The pipeline should be executed by running the `raw_data_processor.py` script located in the `src` directory first and in a second step using `debug_labels_v2.ipynb` to get the final dataset used for training (execute all cells).
+
+Then either the XGBoost model or the MCA-TCN models can be trained by executing the training files.
 
 ```bash
 python src/raw_data_processor.py
